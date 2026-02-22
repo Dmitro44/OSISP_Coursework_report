@@ -7,7 +7,9 @@
 
 #stp2024.full_outline()
 
-#include "intro.typ"
+#include "sections/intro.typ"
 
-#include "first_sec.typ"
+#include "sections/first_sec.typ"
+
+#include "sections/second_sec.typ"
 
