@@ -13,3 +13,5 @@
 
 #include "sections/second_sec.typ"
 
+#bibliography("bibliography.bib")
+
