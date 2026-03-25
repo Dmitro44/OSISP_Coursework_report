@@ -13,5 +13,11 @@
 
 #include "sections/second_sec.typ"
 
+#include "sections/third_sec.typ"
+
+#include "sections/fourth_sec.typ"
+
+#include "sections/fifth_sec.typ"
+
 #bibliography("bibliography.bib")
 
