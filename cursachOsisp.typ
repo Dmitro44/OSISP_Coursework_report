@@ -19,6 +19,8 @@
 
 #include "sections/fifth_sec.typ"
 
+#include "sections/conclusion.typ"
+
 #bibliography("bibliography.bib")
 
 #stp2024.appendix(type: [Обязательное], title: [Листинг программного кода], [
