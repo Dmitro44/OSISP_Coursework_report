@@ -189,7 +189,7 @@
     (
       code: "ГУИР КП 6-05-0612-02 022 ПЗ",
       name-lines: ("Пояснительная записка",),
-      note: "50 c.",
+      note: "49 c.",
     ),
     (section-title: "Графические документы"),
     (
@@ -237,8 +237,8 @@
   norm-control: "Гриценко",
   approver: "Сиротко",
   lit: "Т",
-  current-page: "50",
-  total-pages: "50",
+  current-page: "49",
+  total-pages: "49",
   department: "Кафедра информатики",
   group: "353503",
 )
