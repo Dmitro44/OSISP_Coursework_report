@@ -25,6 +25,17 @@
 
 #stp2024.appendix(type: [Обязательное], title: [Листинг программного кода], [
 
+  #stp2024.listing[Код файла #emph("dns_packet.cpp")][
+    #raw(read("code/dns_packet.cpp"))
+  ]
+
+  #stp2024.listing[Код файла #emph("resolver.cpp")][
+    #raw(read("code/resolver.cpp"))
+  ]
+
+  #stp2024.listing[Код файла #emph("cache.cpp")][
+    #raw(read("code/cache.cpp"))
+  ]
 ])
 
 #stp2024.appendix(type: [Обязательное], title: [Функциональная схема обработки запросов и кэширования], [
