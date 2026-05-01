@@ -10,7 +10,7 @@
     reviewer: "Гриценко",
     norm-control: "Гриценко",
     approver: "Сиротко",
-    lit: "Т",
+    lit: "",
     current-page: "1",
     total-pages: "1",
     department-group: "Кафедра информатики\n группа 353503",
