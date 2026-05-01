@@ -1,5 +1,30 @@
 #import "lib/stp2024.typ"
+
+#let conf = (
+    doc-number: "ГУИР.05061202.022.01 ПЛ",
+    title: (
+      "Графический интерфейс пользователя",
+    ),
+    doc-type: "",
+    developer: "Себелев",
+    reviewer: "Гриценко",
+    norm-control: "Гриценко",
+    approver: "Сиротко",
+    lit: "Т",
+    current-page: "1",
+    total-pages: "1",
+    department-group: "Кафедра информатики\n группа 353503",
+)
+
+// Рамка A4
+#stp2024.frame(paper: "a4", stroke: 0pt, type: "a", font:"GOST type B", config: conf)[
+]
+
 #show: stp2024.template
+
+#set page(
+  footer: []
+)
 
 #let figure_appendix(letter, body, caption: none) = {
   figure(

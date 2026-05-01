@@ -14,10 +14,21 @@
 // #show: stp2024.template
 // ```
 //
-// Всё содержание документа, следующее за этим выражением,
-// будет обёрнуто в функцию template
+// Использование с параметрами:
+//
+// ```
+// #show: stp2024.template.with(italicize_latin: true,
+//                              first_page_number: true)
+// ```
+//
+// Параметры:
+// - first_page_number: отображать номер страницы на первой
+//                      странице документа (default: false);
+// - italicize_latin  : отображать латинские слова курсивом
+//                      внутри абзацей (default: false),
+//                      см. также функцию `no_italic`
 // -----------------------------------------------
-#let template(first_page_number : false, doc) = {
+#let template(first_page_number : false, italicize_latin : false, doc) = {
 
 
   // Оформление текста
@@ -101,6 +112,24 @@
     // п. 2.1.1 : Выравнивание по ширине
     justify : true,
   )
+
+
+  // п. -.-.- : Латинские слова записывают курсивом
+  //            Негласное требование некоторых преподавателей.
+  //            Правило применяется только для абзацного текста,
+  //            в рисунках, таблицах и др. надо позаботиться
+  //            об этом вручную.
+  //            Если по какой-то причине слово необходимо
+  //            оформить обычным шрифтом, используется
+  //            `stp2024.no_italic`
+    show par : p => {
+      if italicize_latin {
+        // Если перед словом специальный символ
+        // то курсив не применяется.
+        show regex("[^\u200B]\b[a-zA-Z]+\b"): it => {emph(it)}
+        p
+      } else { p }
+  }
 
 
   // п. 2.2.3 : Допускается деление на разделы, 
@@ -479,6 +508,7 @@
   }
 
 
+
   doc
 }
 
@@ -639,6 +669,7 @@
 // Обязательные аргументы: 
 //  - kind : тип приложения (обязательное, рекомендуемое или справочное )
 //  - title : название приложения
+//  - label : метка для ссылки на приложение, например, <appendix-listing>
 // 
 // Последним аргументом используется содержание приложения. 
 // Пример использования: 
@@ -647,6 +678,7 @@
 // #stp2024.appendix(
 //  title : [Ответ на главный вопрос жизни],
 //  type : [обязательное],
+//  label : <appendix-answer>,
 //  [ 
 //    Ответ на главный вопрос жизни - 42.
 //  ]
@@ -664,7 +696,10 @@
   let cnt_disp = upper(ru_alph.at(cnt.get().at(0)))
   let atype = args.at("type")
   let aname = args.at("title")
-
+  let alabel = args.at("label", default:none)
+  if alabel != none and type(alabel) != label {
+    panic("`label` argument of `appendix` functions expects type `label`")
+  }
 
   // п. 2.7.3 : Название приложения
   show heading: it =>  {
@@ -695,11 +730,15 @@
   // Спрятанный figure для правильного оформления списка приложений в содержании
   {
       show figure: none;
-      [#figure(
-              kind:"hidden_appendix",
+      [
+        #figure(kind:"hidden_appendix",
               supplement : [Приложение],
               numbering: (..)=>cnt_disp,
-              caption: [(#atype) #aname])[]<appendix>]
+              caption: [(#atype) #aname])[]
+        #if alabel != none {
+          alabel
+        }
+      ]
   }
   body
 
@@ -714,7 +753,7 @@
 // ----------------------------------------------------------
 #let full_outline() = {
   outline()
-  outline(title:none,target:label("appendix"))
+  outline(title:none,target:figure.where(kind:"hidden_appendix"))
   pagebreak(weak:true)
 }
 
@@ -775,3 +814,28 @@
   set par(first-line-indent: 0em)
   body
 })
+
+
+// ----------------------------------------------------------
+// При включённой опции `italicize_latin` отменяет курсивный
+// стиль для слова в аргументе, вставляя специальный символ
+// перед ним.
+//
+// Обязательные аргументы:
+//  - word: единственное слово без пробельных символов
+//
+// Пример: `#stp2024.no_italic[Microslop]`
+// ----------------------------------------------------------
+#let no_italic(word) = {"\u{200B}" + word}
+
+#import "frame.typ": frame
+#import "listOfDocuments.typ": listOfDocuments
+
+// Рамка и основная надпись графического материала
+// Подробную документацию см. во frame.typ
+#let frame = frame
+
+// Ведомость документов (Ведомость курсового проекта)
+// Подробную документацию см. в listOfDocuments.typ
+#let list_of_documents = listOfDocuments
+
