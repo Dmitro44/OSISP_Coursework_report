@@ -41,12 +41,16 @@
 //           хотя по ГОСТу может потребоваться "GOST Type B")
 //  - stroke: толщина рамки страницы (1pt, или 0pt, если рамка не нужна, напр. для плаката)
 //  - content: содержимое рамки
-#let frame(type:"a", paper:"a4",flipped:false, config: default-config, stroke:1pt, font:"Arial", show_label: false, content) = {
+#let frame(type:"a", paper:"a4",flipped:false, config: default-config, stroke:1pt, font:"Arial", show_label: false, position: "right", content) = {
+
+  let pos-align = if position == "left" { left } else { right }
+  let margin-left = if position == "left" { 5mm } else { 20mm }
+  let margin-right = if position == "left" { 20mm } else { 5mm }
 
   set page(
-    // п. 3.1.3 : расстояние от границы формата 20мм слева
-    //            и 5 мм сверху, справа, снизу
-    margin: (left: 20mm, right: 5mm, top: 5mm, bottom: 5mm),
+    // п. 3.1.3 : расстояние от границы формата 20мм со стороны переплета
+    //            и 5 мм сверху, справа (или слева для правой рамки), снизу
+    margin: (left: margin-left, right: margin-right, top: 5mm, bottom: 5mm),
     paper: paper,
     flipped: flipped,
   )
@@ -154,16 +158,9 @@
                        else if type == "б" or type == "b" {8*5mm}
                        else if type == "в" or type == "c" {3*5mm};
 
-  // rect(stroke:stroke, inset:0%, grid(
-  //   columns: (1fr,),
-  //   rows: (1fr, main-caption-height),
-  //   [#content],
-  //   align(right,main-caption(config))
-  // ))
-
   rect(stroke: stroke, inset: 0pt, {
     block(width: 100%, height: 100%, inset: stroke, content)
-    place(bottom+right, block(fill: white, main-caption(config)))
+    place(bottom + pos-align, block(fill: white, main-caption(config)))
 
     if (show_label) {
       let labels = (

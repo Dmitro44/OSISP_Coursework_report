@@ -1,7 +1,7 @@
 #import "lib/stp2024.typ"
 
 #let conf = (
-    doc-number: "ГУИР.05061202.022.001 ПЛ",
+    doc-number: "ГУИР.353503.022.001 ПЛ",
     title: (
       "Графический интерфейс пользователя",
     ),
@@ -17,7 +17,7 @@
 )
 
 // Рамка A4
-#stp2024.frame(paper: "a4", stroke: 0pt, type: "a", font:"GOST type B", show_label: true, config: conf)[
+#stp2024.frame(paper: "a4", stroke: 0pt, type: "a", font:"GOST type B", show_label: false, position: "left", config: conf)[
 ]
 
 #show: stp2024.template
