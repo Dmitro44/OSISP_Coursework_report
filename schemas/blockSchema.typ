@@ -1,7 +1,7 @@
 #import "lib/stp2024.typ"
 
 #let conf = (
-    doc-number: "ГУИР.05061202.022.02",
+    doc-number: "ГУИР.353503.022.002",
     title: (
       "Блок схема алгоритма поиска и формирования DNS-пакета ответа",
     ),
@@ -24,5 +24,5 @@
 
 // Рамка A3 (альбомная, тип а)
 #stp2024.frame(paper:"a3",flipped: true, type:"a", font:"GOST type B", config:conf)[
-  #align(center,image("blockSchemaWithoutFrame.svg"))
+  #align(center,image("blockSchemaWithoutFrame.svg", width: 100%, height: 100%))
 ]

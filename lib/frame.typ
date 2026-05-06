@@ -46,7 +46,7 @@
   set page(
     // п. 3.1.3 : расстояние от границы формата 20мм слева
     //            и 5 мм сверху, справа, снизу
-    margin: (right: 20mm, left: 5mm, top: 5mm, bottom: 5mm),
+    margin: (left: 20mm, right: 5mm, top: 5mm, bottom: 5mm),
     paper: paper,
     flipped: flipped,
   )
@@ -162,8 +162,8 @@
   // ))
 
   rect(stroke: stroke, inset: 0pt, {
-    block(width: 100%, height: 100%, [#content])
-    place(bottom+left, block(fill: white, main-caption(config)))
+    block(width: 100%, height: 100%, inset: stroke, content)
+    place(bottom+right, block(fill: white, main-caption(config)))
 
     if (show_label) {
       let labels = (
