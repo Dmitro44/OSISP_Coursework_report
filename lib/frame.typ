@@ -41,12 +41,12 @@
 //           хотя по ГОСТу может потребоваться "GOST Type B")
 //  - stroke: толщина рамки страницы (1pt, или 0pt, если рамка не нужна, напр. для плаката)
 //  - content: содержимое рамки
-#let frame(type:"a", paper:"a4",flipped:false, config: default-config, stroke:1pt, font:"Arial", content) = {
+#let frame(type:"a", paper:"a4",flipped:false, config: default-config, stroke:1pt, font:"Arial", show_label: false, content) = {
 
   set page(
     // п. 3.1.3 : расстояние от границы формата 20мм слева
     //            и 5 мм сверху, справа, снизу
-    margin: (left: 20mm, right: 5mm, top: 5mm, bottom: 5mm),
+    margin: (right: 20mm, left: 5mm, top: 5mm, bottom: 5mm),
     paper: paper,
     flipped: flipped,
   )
@@ -59,6 +59,10 @@
   )
 
   import table: cell
+
+  let right-label(content) = align(right,
+    pad(right: 0.5pt, top: -8pt, text(size: 10pt, content))
+  )
 
   // Ячейка с ообзначением роли (Разраб., Пров.)
   let role-cell(body) = cell(align: left)[#pad(left: 0.5pt)[#body]]
@@ -158,11 +162,18 @@
   // ))
 
   rect(stroke: stroke, inset: 0pt, {
-    // 1. Контент теперь занимает 100% высоты и ширины рамки
     block(width: 100%, height: 100%, [#content])
-    // 2. Таблица накладывается сверху в правый нижний угол
-    // Добавлен fill: white, чтобы контент под таблицей не мешал чтению текста
-    place(bottom + right, block(fill: white, main-caption(config)))
+    place(bottom+left, block(fill: white, main-caption(config)))
+
+    if (show_label) {
+      let labels = (
+        a4: [Формат А4],
+        a3: [Формат А3],
+      )
+      if paper in labels {
+        right-label(labels.at(paper))
+      }
+    }
   })
 }
 
