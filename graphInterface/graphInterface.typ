@@ -17,7 +17,7 @@
 )
 
 // Рамка A4
-#stp2024.frame(paper: "a4", stroke: 0pt, type: "a", font:"GOST type B", show_label: false, position: "left", config: conf)[
+#stp2024.frame(paper: "a4", stroke: 0pt, type: "a", font:"GOST type B", position: "left", config: conf)[
 ]
 
 #show: stp2024.template

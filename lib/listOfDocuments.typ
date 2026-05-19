@@ -137,7 +137,7 @@
   [Изм.], [Лист], [№ докум.], [Подп.], [Дата],
   //row
 
-  cell(colspan: 2, left-footer-cell[Разраб.]), left-footer-cell[#config.developer], [], [], cell(rowspan: 5, text(size: 12pt, [#upper(config.title.join(linebreak())) \ #config.doc-type])), cell(colspan: 3)[Лит.], [Лист], [Листов],
+  cell(colspan: 2, left-footer-cell[Разраб.]), left-footer-cell[#config.developer], [], [], cell(rowspan: 5, text(size: 12pt, [#upper(config.title.join(linebreak())) \ #text(size:12pt)[#config.doc-type]])), cell(colspan: 3)[Лит.], [Лист], [Листов],
   //row
 
   cell(colspan: 2, left-footer-cell[Пров.]), left-footer-cell[#config.reviewer], [], [], [], [#config.lit], [], [#config.current-page], [#config.total-pages],

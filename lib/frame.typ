@@ -89,7 +89,12 @@
 
     [], [], [], [], [],
 
-    cell(rowspan: 5, [#text(size: 16pt)[#config.title.join(linebreak()) \ #config.doc-type]]),
+    cell(rowspan: 5, [
+      #text(size: 16pt)[
+        #config.title.join(linebreak())
+        #{if config.doc-type != "" [ \ #config.doc-type]}
+      ]
+    ]),
 
     cell(colspan: 3)[Лит.], cell(colspan:2)[Масса], [Маштаб],
 
